@@ -19,7 +19,7 @@ Page({
         self.setData({
             picArray:res.tempFilePaths
         });
-        console.log(res);
+        // console.log(res);
       }
     })
   },

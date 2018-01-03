@@ -1,0 +1,13 @@
+<view class="container flex" style='background:url({{bg}}) no-repeat 0 0/100% 100%'>
+    <view>
+          <image src="{{src}}" data-i="1" class="avatar" bindtap="tofilter" style="filter:saturate({{saturate}}%)  brightness({{brightness}}%) contrast({{contrast}}%) grayscale({{grayscale}}%) sepia({{sepia}}%);border-radius:50%"></image>
+          <image src="{{src}}" data-i="2" class="avatar" bindtap="tofilter" style="filter:saturate({{saturate}}%)  brightness({{brightness}}%) contrast({{contrast}}%) grayscale({{grayscale}}%) sepia({{sepia}}%);border-radius:50%"></image>
+          <!--textarea.wxml-->
+          <view class="textarea">
+            <textarea bindblur="bindTextAreaBlur" auto-height placeholder="我是第二个模板" placeholder-style="color:#fff;"/>
+          </view>
+    </view>
+</view>
+
+<view class='genate-btn'>生成图片</view>
+<canvas id="canvas" width="375" height="667"></canvas>

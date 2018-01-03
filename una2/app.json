@@ -3,6 +3,7 @@
     
     "pages/index/index",
     "pages/avatarUpload/index/index",
+    "pages/avatarUpload/second/second",
     "pages/picture/picture",
 
     "pages/upload/upload",

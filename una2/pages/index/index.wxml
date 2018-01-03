@@ -12,22 +12,9 @@
   <view class='text'>快来试海报</view>
   <view class='content'>
     <view class='unit'>
-      <block wx:for="{{uimgUrls}}" wx:key="" wx:item="item">
-        <!-- <navigator class="" url="{{item.url}}" class="{{item.u}}" hover-class="navigator-hover">
-          <image src="{{item.img}}" class="slide-image" />
-        </navigator> -->
-        <view class="" data-url="{{item.url}}" class="{{item.u}}" hover-class="navigator-hover" bindtap="getIndex" data-i="{{index}}">
-          <image src="{{item.img}}" class="slide-image" />
+        <view wx:for="{{uimgUrls}}" class="" data-url="{{item.url}}" class="{{item.u}}" hover-class="navigator-hover" bindtap="getIndex" data-i="{{index}}">
+          <image src="{{item.img}}" class="forimg" />
         </view> 
-      </block>
-
-      <!-- <view wx:for="{{uimgUrls}}" class="{{item.u}}">
-        <image src="{{item.img}}" class="slide-image" url="../avatarUpload/index/index"/>
-      </view> -->
-      <!-- <view class='u uone'>
-        <image src="{{item}}" class="slide-image" />
-      </view> -->
-       <!-- <view class='u utwo'>b</view>  -->
     </view>
   </view>
 </view>

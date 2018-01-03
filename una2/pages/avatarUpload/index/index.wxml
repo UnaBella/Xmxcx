@@ -2,6 +2,10 @@
     <view>
           <image src="{{src}}" class="avatar" bindtap="tofilter" style="filter:saturate({{saturate}}%)  brightness({{brightness}}%) contrast({{contrast}}%) grayscale({{grayscale}}%) sepia({{sepia}}%);border-radius:50%"></image>
           <view class="item flex" bindtap="tofilter">click me</view>
+          <!--textarea.wxml-->
+          <view class="textarea">
+            <textarea bindblur="bindTextAreaBlur" auto-height placeholder="想说点什么？" placeholder-style="color:#fff;"/>
+          </view>
     </view>
 </view>
 

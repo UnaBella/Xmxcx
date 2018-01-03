@@ -35,23 +35,28 @@ Page({
   touchEnd (e) {
     this.wecropper.touchEnd(e)
   },
-  getCropperImage () {
+  getCropperImage (option) {
     this.wecropper.getCropperImage((avatar) => {
       console.log(avatar)
+      console.log(option)
       if (avatar) {
         //  获取到裁剪后的图片
         // wx.redirectTo({
         var pages = getCurrentPages();
         var currPage = pages[pages.length - 1];   //当前页面
         var prevPage = pages[pages.length - 2];  //上一个页面
-        console.log(pages);
         //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
         prevPage.setData({
-          src: avatar
+          src: avatar,
+          saturate: this.data.cropperOpt.saturate,
+          brightness: this.data.cropperOpt.brightness,
+          contrast: this.data.cropperOpt.contrast,
+          grayscale: this.data.cropperOpt.grayscale,
+          sepia: this.data.cropperOpt.sepia
         })
         //回到海报模板页
         wx.navigateBack({
-          url: `../avatarUpload/index/index?avatar=${avatar}`
+          url: `../avatarUpload/index/aaa?avatar=${avatar}&saturate=${this.data.cropperOpt.saturate}&brightness=${this.data.cropperOpt.brightness}&contrast=${this.data.cropperOpt.contrast}&grayscale=${this.data.cropperOpt.grayscale}&sepia=${this.data.cropperOpt.sepia}`
         })
         
       } else {
@@ -76,9 +81,6 @@ Page({
     })
   },
   onLoad (option) {
-    console.log("====");//饱和度 / 亮度 / 对比度 / 灰度 / 陈旧度（褐色）
-    console.log(option);
-    console.log(this.data);
 
     this.setData({
       cropperOpt: {
@@ -109,7 +111,6 @@ Page({
     // this.data.cropperOpt.sepia = option.sepia
 
     const { cropperOpt } = this.data
-    console.log(cropperOpt);
     if (option.src) {
       cropperOpt.src = option.src
       new WeCropper(cropperOpt)

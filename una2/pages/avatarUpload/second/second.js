@@ -6,6 +6,7 @@ Page({
   
   
   data: {
+    srcss:['',''],
     src: '',
     bg:'',
     //饱和度 / 亮度 / 对比度 / 灰度 / 陈旧度（褐色）
@@ -21,9 +22,9 @@ Page({
     console.log(e.detail.value)
   },
  
-  tofilter: function () {
+  tofilter: function (option) {
     wx.navigateTo({
-      url: '../../../pages/picture/picture'
+      url: '../../../pages/picture/picture?datai'+ option.currentTarget
     })
   },
 
