@@ -1,9 +1,11 @@
-<view class="container flex" style='background:url({{bg}}) no-repeat 0 0/100% 100%'>
+<view class="container flex {{containerShow}}">
+    <image src='{{bg}}' id='bg'></image>
     <view>
           <image src="{{src}}" class="avatar" bindtap="tofilter" style="filter:saturate({{saturate}}%)  brightness({{brightness}}%) contrast({{contrast}}%) grayscale({{grayscale}}%) sepia({{sepia}}%);border-radius:50%"></image>
           <view class="item flex" bindtap="tofilter">click me</view>
     </view>
 </view>
 
-<view class='genate-btn'>生成图片</view>
-<canvas id="canvas" width="375" height="667"></canvas>
+<view class='genate-btn {{genateBtnShow}}' bindtap="generatePic">生成图片</view>
+<canvas canvas-id="canvas" style='width:{{windowWidth}}px;height:{{windowHeight}}px;' class='{{canvasShow}}'></canvas>
+<image src='{{targetImg.src}}'  style='width:{{windowWidth}}px;height:{{windowHeight}}px;' class='{{targetImgShow}}'></image>
