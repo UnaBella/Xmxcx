@@ -20,3 +20,20 @@
 .item{
     line-height: 3rem;
 }
+.genate-btn{
+  display:block;
+  width:200rpx;
+  height:100rpx;
+  line-height:100rpx;
+  color:#fff;
+  text-align:center;
+  border:1px solid #000;
+  position:absolute;
+  right:0;
+  bottom:0;
+  background:#000;
+  display: none
+}
+#canvas{
+  display: none
+}
