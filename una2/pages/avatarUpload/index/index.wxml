@@ -4,3 +4,6 @@
           <view class="item flex" bindtap="tofilter">click me</view>
     </view>
 </view>
+
+<view class='genate-btn'>生成图片</view>
+<canvas id="canvas" width="375" height="667"></canvas>
