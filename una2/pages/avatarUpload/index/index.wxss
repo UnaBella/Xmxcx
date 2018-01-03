@@ -29,7 +29,7 @@
 }
 .textarea textarea{
   max-height: 300px;
-
+}
 #bg{
   position: absolute;
   top: 0;
