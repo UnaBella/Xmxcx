@@ -1,7 +1,7 @@
 /**
  * Created by sail on 2017/4/14.
  */
-const app = getApp()
+const app = getApp();
 Page({
   data: {
     src: '',
