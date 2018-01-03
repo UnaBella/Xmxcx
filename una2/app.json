@@ -1,0 +1,17 @@
+{
+  "pages":[
+    
+    "pages/index/index",
+    "pages/avatarUpload/index/index",
+    "pages/picture/picture",
+
+    "pages/upload/upload",
+    "pages/allEffect/allEffect"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "海报",
+    "navigationBarTextStyle":"white"
+  }
+}

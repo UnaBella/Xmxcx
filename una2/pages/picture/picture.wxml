@@ -1,0 +1,37 @@
+<view class="addpicture">
+  <button bindtap="takephoto">选择照片</button>
+  <block wx:for="{{picArray}}" wx:key="">
+    <!-- <image src="{{item}}"></image> -->
+    <image style="filter:saturate({{saturate}}%) brightness({{brightness}}%) contrast({{contrast}}%) grayscale({{grayscale}}%) sepia({{sepia}}%)" src="{{item}}"></image>
+  </block>
+  <!-- <image class="{{addblur == 1 ? 'addblur':''}}{{oldEffect == 1 ?'oldeffect':''}} {{addretro == 1 ?'addretro':''}}{{addBeati == 1 ? 'addBeati':''}}" src="../../images/img1.jpg"></image> -->
+  <view class="effectview">
+    <!-- <button class="btn" bindtap="addblur">模糊</button> -->
+    <button class="btn" bindtap="addOld">怀旧</button>
+    <button class="btn" bindtap="addretro">复古</button>
+    <button class="btn" bindtap="addBeati">美白</button>
+    <button class="btn" bindtap="originpic">还原</button>
+    <button class="btn" bindtap="toCut"   hover-class="navigator-hover" style='color:blue'>剪裁</button>
+  </view>
+   <!-- <button bindtap="originpic">还原</button> -->
+  <view>
+    <!-- <image style="filter:saturate({{saturate}}%) brightness({{brightness}}%) contrast({{contrast}}%)" src="../../images/cat.jpeg"></image> -->
+    <text class="fz14">饱和度</text>
+    <slider bindchange="baohedu" show-value min="0" max="200" value="{{saturate}}" />
+    
+    <text class="fz14">亮度</text>
+    <slider bindchange="liangdu" show-value min="0" max="200" value="{{brightness}}" />
+    
+    <text class="fz14">对比度</text>
+    <slider bindchange="duibidu" show-value min="0" max="200" value="{{contrast}}" />
+    
+    <text class="fz14">灰度</text>
+    <slider bindchange="huidu" show-value min="0" max="100" value="{{grayscale}}" />
+    
+    <text class="fz14">陈旧度</text>
+    <slider bindchange="hese" show-value min="0" max="100" value="{{sepia}}" />
+</view>
+
+<!-- url="../upload/upload" -->
+<view></view>
+</view> 

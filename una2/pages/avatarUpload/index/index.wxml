@@ -1,0 +1,6 @@
+<view class="container flex" style='background:url({{bg}}) no-repeat 0 0/100% 100%'>
+    <view>
+          <image src="{{src}}" class="avatar" bindtap="tofilter" style="filter:saturate({{saturate}}%)  brightness({{brightness}}%) contrast({{contrast}}%) grayscale({{grayscale}}%) sepia({{sepia}}%);border-radius:50%"></image>
+          <view class="item flex" bindtap="tofilter">click me</view>
+    </view>
+</view>

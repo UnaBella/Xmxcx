@@ -1,0 +1,30 @@
+/**index.wxss**/
+.indexcontainer{height: 100%}
+.header{height: 30%;}
+swiper{height: 100%;}
+.slide-image{width: 100%;height: 100%}   
+.text{
+  text-align: center;
+  font-size: .8rem;
+  /* height: 25px; */
+  line-height: 2; 
+}
+.content{
+  height: 60%;
+}
+.unit{
+  height: 50%;
+  border: 1px solid red ;
+  display: flex;
+}
+.u{
+  border: 1px solid green;
+  flex: 1;
+  margin: 0 30px
+  }
+.uone{
+  margin-right: 10px;
+}
+.utwo{
+  margin-left: 10px;
+}

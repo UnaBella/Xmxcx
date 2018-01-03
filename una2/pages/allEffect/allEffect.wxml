@@ -1,0 +1,9 @@
+<view>
+    <image style="filter:saturate({{saturate}}%) brightness({{brightness}}%) contrast({{contrast}}%)" src="../../images/cat.jpeg"></image>
+    饱和度
+    <slider bindchange="baohedu" show-value min="0" max="1000" value="170" />
+    亮度
+    <slider bindchange="liangdu" show-value min="0" max="200" value="110" />
+    对比度
+    <slider bindchange="duibidu" show-value min="0" max="200" value="70" />
+</view>

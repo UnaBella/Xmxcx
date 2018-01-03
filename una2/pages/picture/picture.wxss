@@ -1,0 +1,23 @@
+
+/* .addblur {
+    filter: blur(6px);
+} */
+.btn {
+    width:60px;height:34px;font-size:14px
+}
+.effectview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.fz14{font-size: 14px;}
+
+/* .oldeffect {
+    filter: sepia(.5);
+}
+.addretro {
+    filter: grayscale(1);
+}
+.addBeati {
+    filter:  brightness(130%);
+} */
