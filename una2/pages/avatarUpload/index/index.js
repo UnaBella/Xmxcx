@@ -43,7 +43,6 @@ Page({
   //   }
   // }
  onLoad : function (option) {
-   console.log(123)
    let avatar, index;
    if (option.avatar !== undefined) { avatar = option.avatar };
 
