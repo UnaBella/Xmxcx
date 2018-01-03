@@ -43,8 +43,8 @@ Page({
   //   }
   // }
  onLoad : function (option) {
-   console.log(123)
    let avatar, index;
+   //2.头像，生成海报
    if (option.avatar !== undefined) { avatar = option.avatar };
 
    if (avatar !== undefined) {
@@ -53,7 +53,8 @@ Page({
      })
    }
    console.log(option);
-
+   
+    //1.加背景图
    if (option.index !== undefined) {
      index = 1 * (option.index);
 
