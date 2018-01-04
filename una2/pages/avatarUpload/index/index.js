@@ -66,6 +66,7 @@ Page({
   },
   onShow : function(){
     var _this = this;
+    this.data.src = this.data.srcsss['0'].src;
     if (this.data.src !== ''){
       //显示生成图片按钮
       this.setData({
