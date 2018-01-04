@@ -4,8 +4,6 @@
 var draw = require('./draw.js');
 const app = getApp();
 Page({
-  
-  
   data: {
     src: '',
     bg:'',
@@ -18,9 +16,9 @@ Page({
     pixelRatio : 0,
     windowWidth : 0,
     windowHeight : 0,
+    genateBtnShow: 'none',
     containerShow : '',
-    genateBtnShow : 'none',
-    targetImgShow : '',
+    canvasShow : '',
     targetImg :{
       width:93,
       height:93,
@@ -28,8 +26,6 @@ Page({
       top:215,
       src : ''
     }
-
-
   },
   //输入框
   bindTextAreaBlur: function (e) {
@@ -84,69 +80,103 @@ Page({
     }
   },
   generatePic : function(e){
-    console.log(e);
+
     var ctx = wx.createCanvasContext('canvas');
     var _this = this;
     var head_w;
     var head_h;
     var data = this.data;
-    console.log(data.bg);
+    wx.showLoading({
+      title: '生成中...',
+    })
     //将图片保存到本地（canvas绘制线上图片时，必须先下载到本地,真机不显示）
-    wx.saveFile({
-      tempFilePath: app.globalData.tempFilePaths,
+    wx.downloadFile({
+      url: data.bg, 
       success: function (res) {
-        console.log('saved.....................')
-        console.log(res);
-        var savedFilePath = res.savedFilePath;
+        if (res.statusCode === 200) {
 
-        //获取保存的
-        wx.getSavedFileList({
-          success: function (res) {
-            console.log(res.fileList)
-          }
-        })
+          wx.saveFile({
+            tempFilePath: res.tempFilePath, //下载后的图片临时地址
+            success: function (res) {
 
-        //头像，描述生成海报
-        //ctx.drawImage(savedFilePath, 0, 0, data.windowWidth, data.windowWidth);
-        //ctx.draw(true);
+              var savedFilePath = res.savedFilePath
+              //头像，描述生成海报
+              //1.绘制背景
+              ctx.drawImage(savedFilePath, 0, 0, data.windowWidth, data.windowHeight);
+              ctx.draw(true,function(){
+                //-------------------------------------------------------------------
+                //2.绘制头像
+                ctx.drawImage(data.src, data.targetImg.left, data.targetImg.top, data.targetImg.width, data.targetImg.height);
+                ctx.draw(true, function () {
+                  //3.canvas生成图片
+                  wx.canvasToTempFilePath({
+                    x: 0,
+                    y: 0,
+                    width: data.windowWidth,
+                    height: data.windowHeight,
+                    destWidth: data.windowWidth,
+                    destHeight: data.windowHeight,
+                    canvasId: 'canvas',
+                    success: function (res) {
+                      _this.setData({
+                        containerShow: 'none',
+                        canvasShow: 'none',
+                        genateBtnShow: 'none',
+                        targetImg: {
+                          src: res.tempFilePath
+                        }
+                      });
+                      wx.hideLoading();
+                      //4.保存到相册
+                      if (wx.saveImageToPhotosAlbum) {
+                        console.log(res.tempFilePath);
+                        wx.saveImageToPhotosAlbum({
+                          filePath: res.tempFilePath,
+                          success: function (res) {
+                            console.log(res);
+                            //Toast                     
+                            wx.showToast({
+                              title: '保存到相册',
+                              icon: 'success',
+                              duration: 2000
+                            });
+                          },
+                          fail: function (res) {
+                            console.log(res)
+                            console.log('fail')
+                          }
+                        });
+                      } else {
+                        // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
+                        wx.showModal({
+                          title: '提示',
+                          content: '预览长按保存'
+                        })
+                      }
+
+                    }
+                  });
+                });
+
+              });
+            },
+            fail: function () {
+              console.log("保存图片失败")
+            }
+          })
+        }
       }
-    });
+    });    
 
-    
-    
-
-    //获取头像参数
-    // wx.getImageInfo({
-    //   src: _this.data.src,
-    //   success: function (res) {
-    //     console.log(res);
-    //     head_w = res.width;
-    //     head_h = res.height;
-    //     ctx.drawImage(data.src, data.targetImg.left, data.targetImg.top, data.targetImg.width, data.targetImg.height);
-    //     ctx.draw(true,function(){
-    //       //canvas生成图片
-    //       wx.canvasToTempFilePath({
-    //         x: 0,
-    //         y: 0,
-    //         width: data.windowWidth,
-    //         height: data.windowHeight,
-    //         destWidth: data.windowWidth,
-    //         destHeight: data.windowHeight,
-    //         canvasId: 'canvas',
-    //         success: function (res) {
-    //           console.log(res.tempFilePath);
-    //           _this.setData({
-    //             // containerShow: 'none',
-    //             // targetImgShow : '',
-    //             targetImg: {
-    //               src: res.tempFilePath
-    //             }
-    //           });
-    //         }
-    //       });
-    //     });
-        
-    //   }
-    // });
-  }
+  },
+  /**   
+     * 预览图片  
+     */
+  previewImage: function (e) {
+    var current = e.target.dataset.src;
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接  
+      urls: [this.data.targetImg.src] // 需要预览的图片http链接列表  
+    })
+  }    
 })
