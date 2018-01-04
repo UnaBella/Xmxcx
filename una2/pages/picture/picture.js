@@ -1,6 +1,8 @@
 // pages/picture/picture.js
+
 Page({
   data:{
+    datai:'',
     picArray:[],
     //饱和度 / 亮度 / 对比度 / 灰度 / 陈旧度（褐色）
     saturate: 100,
@@ -8,6 +10,11 @@ Page({
     contrast: 100,
     grayscale: 0,
     sepia:0
+  },
+  onLoad:function(op){
+    
+    // console.log(op.datai)
+    this.data.datai = op.datai;
   },
   takephoto:function(){
     var self = this;
@@ -113,11 +120,12 @@ Page({
     });
   },
   //跳转剪裁框
-  toCut : function(e){
+  toCut : function(op){
+    // console.log(this.data.datai);
     var src = this.data.picArray[0];
-    // console.log(src);
+    
     wx.redirectTo({
-      url: "../upload/upload?src=" + src + "&saturate=" + this.data.saturate + "&brightness=" + this.data.brightness + "&contrast=" + this.data.contrast + "&grayscale=" + this.data.grayscale + "&sepia=" + this.data.sepia
+      url: "../upload/upload?src=" + src + "&datai=" + this.data.datai + "&saturate=" + this.data.saturate + "&brightness=" + this.data.brightness + "&contrast=" + this.data.contrast + "&grayscale=" + this.data.grayscale + "&sepia=" + this.data.sepia
     })
   }
 })

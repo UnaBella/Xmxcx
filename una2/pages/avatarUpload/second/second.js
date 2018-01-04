@@ -7,6 +7,14 @@ Page({
   
   data: {
     srcss:['',''],
+    srcsss:{
+      '0':{
+        'src' : ''
+      },
+      '1':{
+        'src': ''
+      }
+    },
     src: '',
     bg:'',
     //饱和度 / 亮度 / 对比度 / 灰度 / 陈旧度（褐色）
@@ -23,8 +31,9 @@ Page({
   },
  
   tofilter: function (option) {
+    // console.log(option.currentTarget.dataset.i)
     wx.navigateTo({
-      url: '../../../pages/picture/picture?datai'+ option.currentTarget
+      url: '../../../pages/picture/picture?datai=' + option.currentTarget.dataset.i
     })
   },
 

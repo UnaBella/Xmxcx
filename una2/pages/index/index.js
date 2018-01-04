@@ -1,4 +1,6 @@
 //index.js
+//获取应用实例
+const app = getApp();
 Page({
   data: {
     imgUrls: [
@@ -11,15 +13,11 @@ Page({
     interval: 5000,
     duration: 1000,
 
-    // 
-    uimgUrls: [
-      { img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', u: "u uone", url:"../avatarUpload/index/index"},
-      { img: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', u: "u utwo", url: "../avatarUpload/second/second"}
-    ],
+    uimgUrls: app.globalData.imgArr,
   },
-  onLoad: function () {
-    //设置全局变量    
-    // app.globalData.imgArr = this.data.uimgUrls;
+  
+  onShow:function(){
+    app.globalData.templateData = {};
   },
   getIndex: function (option) {
     wx.navigateTo({

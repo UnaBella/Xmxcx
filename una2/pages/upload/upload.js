@@ -3,9 +3,10 @@ import WeCropper from '../we-cropper/we-cropper.js'
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
-
+const app = getApp();
 Page({
   data: {
+    datai:'',
     cropperOpt: {
       id: 'cropper',
       width,
@@ -39,6 +40,9 @@ Page({
     this.wecropper.getCropperImage((avatar) => {
       console.log(avatar)
       console.log(option)
+      console.log(this.data.datai);
+      var num = this.data.datai + '';
+
       if (avatar) {
         //  获取到裁剪后的图片
         // wx.redirectTo({
@@ -46,14 +50,18 @@ Page({
         var currPage = pages[pages.length - 1];   //当前页面
         var prevPage = pages[pages.length - 2];  //上一个页面
         //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+        
+        app.globalData.templateData[num]={};
+        app.globalData.templateData[num]['src'] = avatar;
         prevPage.setData({
-          src: avatar,
+          srcsss: app.globalData['templateData'],    
           saturate: this.data.cropperOpt.saturate,
           brightness: this.data.cropperOpt.brightness,
           contrast: this.data.cropperOpt.contrast,
           grayscale: this.data.cropperOpt.grayscale,
           sepia: this.data.cropperOpt.sepia
-        })
+        });
+        console.log(prevPage.data);
         //回到海报模板页
         wx.navigateBack({
           url: `../avatarUpload/index/aaa?avatar=${avatar}&saturate=${this.data.cropperOpt.saturate}&brightness=${this.data.cropperOpt.brightness}&contrast=${this.data.cropperOpt.contrast}&grayscale=${this.data.cropperOpt.grayscale}&sepia=${this.data.cropperOpt.sepia}`
@@ -81,7 +89,8 @@ Page({
     })
   },
   onLoad (option) {
-
+  console.log(option)
+  this.data.datai = option.datai;
     this.setData({
       cropperOpt: {
         id: 'cropper',
