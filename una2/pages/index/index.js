@@ -1,6 +1,4 @@
 //index.js
-//获取应用实例
-const app = getApp()
 Page({
   data: {
     imgUrls: [
@@ -21,7 +19,7 @@ Page({
   },
   onLoad: function () {
     //设置全局变量    
-    app.globalData.imgArr = this.data.uimgUrls;
+    // app.globalData.imgArr = this.data.uimgUrls;
   },
   getIndex: function (option) {
     wx.navigateTo({
