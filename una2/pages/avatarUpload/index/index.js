@@ -83,49 +83,70 @@ Page({
       });
     }
   },
-  generatePic : function(){
+  generatePic : function(e){
+    console.log(e);
     var ctx = wx.createCanvasContext('canvas');
     var _this = this;
     var head_w;
     var head_h;
     var data = this.data;
-
-    //头像，描述生成海报
-    ctx.drawImage(data.bg, 0, 0, data.windowWidth, data.windowHeight);
-    ctx.draw();
-    //获取头像参数
-    wx.getImageInfo({
-      src: _this.data.src,
+    console.log(data.bg);
+    //将图片保存到本地（canvas绘制线上图片时，必须先下载到本地,真机不显示）
+    wx.saveFile({
+      tempFilePath: app.globalData.tempFilePaths,
       success: function (res) {
+        console.log('saved.....................')
         console.log(res);
-        head_w = res.width;
-        head_h = res.height;
-        ctx.drawImage(data.src, data.targetImg.left, data.targetImg.top, data.targetImg.width, data.targetImg.height);
-        ctx.draw(true,function(){
-          console.log('draw------------------------------')
-          //canvas生成图片
-          wx.canvasToTempFilePath({
-            x: 0,
-            y: 0,
-            width: data.windowWidth,
-            height: data.windowHeight,
-            destWidth: data.windowWidth,
-            destHeight: data.windowHeight,
-            canvasId: 'canvas',
-            success: function (res) {
-              console.log(res.tempFilePath);
-              _this.setData({
-                // containerShow: 'none',
-                // targetImgShow : '',
-                targetImg: {
-                  src: res.tempFilePath
-                }
-              });
-            }
-          });
-        });
-        
+        var savedFilePath = res.savedFilePath;
+
+        //获取保存的
+        wx.getSavedFileList({
+          success: function (res) {
+            console.log(res.fileList)
+          }
+        })
+
+        //头像，描述生成海报
+        //ctx.drawImage(savedFilePath, 0, 0, data.windowWidth, data.windowWidth);
+        //ctx.draw(true);
       }
     });
+
+    
+    
+
+    //获取头像参数
+    // wx.getImageInfo({
+    //   src: _this.data.src,
+    //   success: function (res) {
+    //     console.log(res);
+    //     head_w = res.width;
+    //     head_h = res.height;
+    //     ctx.drawImage(data.src, data.targetImg.left, data.targetImg.top, data.targetImg.width, data.targetImg.height);
+    //     ctx.draw(true,function(){
+    //       //canvas生成图片
+    //       wx.canvasToTempFilePath({
+    //         x: 0,
+    //         y: 0,
+    //         width: data.windowWidth,
+    //         height: data.windowHeight,
+    //         destWidth: data.windowWidth,
+    //         destHeight: data.windowHeight,
+    //         canvasId: 'canvas',
+    //         success: function (res) {
+    //           console.log(res.tempFilePath);
+    //           _this.setData({
+    //             // containerShow: 'none',
+    //             // targetImgShow : '',
+    //             targetImg: {
+    //               src: res.tempFilePath
+    //             }
+    //           });
+    //         }
+    //       });
+    //     });
+        
+    //   }
+    // });
   }
 })
