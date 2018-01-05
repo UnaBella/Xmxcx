@@ -86,12 +86,16 @@ Page({
     }
   },
   generatePic : function(e){
-
     var ctx = wx.createCanvasContext('canvas');
     var _this = this;
-    var head_w;
-    var head_h;
     var data = this.data;
+    var bg_w = data.windowWidth * data.pixelRatio;
+    var bg_h = data.windowHeight * data.pixelRatio;
+    var head_w = data.targetImg.width * data.pixelRatio;
+    var head_h = data.targetImg.height * data.pixelRatio;
+    var head_left = data.targetImg.left * data.pixelRatio;
+    var head_top = data.targetImg.top * data.pixelRatio;
+
     wx.showLoading({
       title: '生成中...',
     })
@@ -100,28 +104,26 @@ Page({
       url: data.bg, 
       success: function (res) {
         if (res.statusCode === 200) {
-
           wx.saveFile({
             tempFilePath: res.tempFilePath, //下载后的图片临时地址
             success: function (res) {
-
               var savedFilePath = res.savedFilePath
               //头像，描述生成海报
               //1.绘制背景
-              ctx.drawImage(savedFilePath, 0, 0, data.windowWidth, data.windowHeight);
+              ctx.drawImage(savedFilePath, 0, 0, bg_w, bg_h);
               ctx.draw(true,function(){
                 //-------------------------------------------------------------------
                 //2.绘制头像
-                ctx.drawImage(data.src, data.targetImg.left, data.targetImg.top, data.targetImg.width, data.targetImg.height);
+                ctx.drawImage(data.src, head_left, head_top, head_w, head_h);
                 ctx.draw(true, function () {
                   //3.canvas生成图片
                   wx.canvasToTempFilePath({
                     x: 0,
                     y: 0,
-                    width: data.windowWidth,
-                    height: data.windowHeight,
-                    destWidth: data.windowWidth,
-                    destHeight: data.windowHeight,
+                    width: bg_w,
+                    height: bg_h,
+                    destWidth: bg_w,
+                    destHeight: bg_h,
                     canvasId: 'canvas',
                     success: function (res) {
                       _this.setData({
@@ -153,7 +155,6 @@ Page({
                           }
                         });
                       } else {
-                        // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
                         wx.showModal({
                           title: '提示',
                           content: '预览长按保存'

@@ -11,5 +11,5 @@
 </view>
 
 <view class='genate-btn {{genateBtnShow}}' bindtap="generatePic">生成图片</view>
-<canvas canvas-id="canvas" style='width:{{windowWidth}}px;height:{{windowHeight}}px;' class='{{canvasShow}}'></canvas>
+<canvas canvas-id="canvas" style='width:{{windowWidth*pixelRatio}}px;height:{{windowHeight*pixelRatio}}px;' class='{{canvasShow}}'></canvas>
 <image src='{{targetImg.src}}'  style='width:{{windowWidth}}px;height:{{windowHeight}}px;' bindtap='previewImage'></image>
